@@ -1,0 +1,45 @@
+//Given two binary strings a and b, return their sum as a binary string.
+
+ 
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+
+
+class Solution {
+public:
+
+    string addBinary(string a, string b) {
+        int len1=a.length()-1;
+        int len2=b.length()-1;
+        int i=0;
+        string ans="";
+        int carry=0;
+        while(i<=len1||i<=len2||carry!=0)
+        {
+            int x,y;
+            if(i<=len1&&a[len1-i]=='1')
+            x=1;
+            else
+            x=0;
+            if(i<=len2&&b[len2-i]=='1')
+            y=1;
+            else
+            y=0;
+        ans=to_string((x+y+carry)%2)+ans;
+        carry=(x+y+carry)/2;
+    i++;
+        }
+        return ans;
+        
+        
+        
+    }
+};

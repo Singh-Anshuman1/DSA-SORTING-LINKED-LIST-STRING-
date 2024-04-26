@@ -1,0 +1,88 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+int data;
+node *next;
+};
+class linked_list
+{
+public:
+node *head,*tail;
+public:
+linked_list()
+{
+head = NULL;
+tail = NULL;
+}
+void add_node(int n)
+{
+node *tmp = new node;
+tmp->data = n;
+tmp->next = NULL;
+if(head == NULL)
+{
+head = tmp;
+tail = tmp;
+}
+else
+{
+tail->next = tmp;
+tail = tmp;
+}
+}
+void display()
+{
+node *ptr=new node;
+ptr=head;
+while(ptr!=NULL)
+{
+cout<<ptr->data<<" " ;
+ptr=ptr->next;
+}
+}
+void deletenode()
+{
+    cout<<endl;
+    int pos;
+    cout<<"ENTER THE NODE POSITION WHICH YOU WANT TO DELETE"<<endl;
+    cin>>pos;
+    node *ptr=new node;
+    node *con=new node;
+    int flag=0;
+    ptr=head;
+    if(pos==1)
+    head=head->next;
+    else if(pos==7)
+    {
+        for(int i=1;i<6;i++)
+            ptr=ptr->next;
+        ptr->next=NULL;
+
+    }
+    else
+    {
+        for(int i=2;i<pos;i++)
+            ptr=ptr->next;
+        con=ptr;
+        con=con->next;
+        con=con->next;
+        ptr->next=con;
+    }
+}
+};
+int main()
+{
+linked_list a;
+a.add_node(1);
+a.add_node(2);
+a.add_node(3);
+a.add_node(4);
+a.add_node(5);
+a.add_node(6);
+a.add_node(7);
+a.display();
+a.deletenode();
+a.display();
+return 0;
+}
