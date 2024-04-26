@@ -1,0 +1,58 @@
+Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.
+
+Since the result may be very large, so you need to return a string instead of an integer.
+
+ 
+
+Example 1:
+
+Input: nums = [10,2]
+Output: "210"
+Example 2:
+
+Input: nums = [3,30,34,5,9]
+Output: "9534330"
+
+
+
+class Solution {
+public:
+    static bool compare(string a, string b) {
+        return (a + b) > (b + a);
+    }
+
+    string largestNumber(vector<int>& nums) {
+        if (nums.size() == 1) {
+            return to_string(nums[0]);
+        }
+        string ans;
+        vector<string> str;
+
+        // Convert integers to strings
+        for (int i = 0; i < nums.size(); i++) {
+            str.push_back(to_string(nums[i]));
+        }
+
+        // Sort the strings using the custom comparison function
+        sort(str.begin(), str.end(), compare);
+
+        // Concatenate the sorted strings to form the largest number
+        for (int i = 0; i < str.size(); i++) {
+            ans += str[i];
+        }
+
+        // Handle leading zeros
+        int start = 0;
+        while (ans[start] == '0' && start < ans.size()) {
+            start++;
+        }
+        ans = ans.substr(start);
+
+        // If ans is empty (all zeros), return "0"
+        if (ans.empty()) {
+            return "0";
+        }
+
+        return ans;
+    }
+};

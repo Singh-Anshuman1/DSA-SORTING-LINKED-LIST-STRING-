@@ -1,0 +1,36 @@
+// In first round loop starts from 1, 0th element is considered sorted and then the element is compared until it is placed in correct position and then it iterates . In insertion sort we dont swap but we shift
+Adapatable algorithm(less comparisons) 
+Stable algorithm
+
+Best Case  - O(n)  // Already sorted
+Worst Case - O(n^2)
+
+
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int arr[]={7,3,4,1,18,23,2,6};
+    int n=sizeof(arr)/sizeof(int);
+    for(int i=1;i<n;i++)             // first element is considered sorted
+    {
+        int temp=arr[i];
+        int j;
+        for( j=i-1;j>=0;j--)
+        {
+            if(arr[j]>temp)           // previous element is bigger then we shift
+            arr[j+1]=arr[j];           // shifting the elements
+            else
+            {
+                break;               // previous element is smaller then we do nothing
+            }
+        }
+        arr[j+1]=temp;
+        
+    }
+    for(int i=0;i<n;i++)
+    cout<<arr[i]<<" ";
+
+    return 0;
+}

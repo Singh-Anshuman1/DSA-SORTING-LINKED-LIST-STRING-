@@ -1,0 +1,38 @@
+//Dutch national Flag algorithm(3 pointer approach)
+low,mid,high
+[0 to low-1] = 0
+[low to mid-1] = 1
+[mid to high] = random numbers(0,1,2) (unsorted part)
+[high+1 to n-1] = 2
+
+
+when the entire array is unsorted i.e the starting array  mid will be pointing to the starting element and high pointing to the ending element
+
+class Solution
+{
+    public:
+    void sort012(int a[], int n)
+    {
+        int low=0;
+        int mid=0;
+        int high=n-1;
+        while(mid<=high)
+        {
+           
+            if(a[mid]==0)
+            {
+            swap(a[low],a[mid]);
+            mid++;
+            low++;
+            }
+            else if(a[mid]==1)
+            mid++;
+            else
+            {
+            swap(a[mid],a[high]);
+            high--;
+            }
+        }
+    }
+    
+}

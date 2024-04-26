@@ -1,0 +1,83 @@
+Best Case:  Ω (N log (N))
+Average Case:  θ ( N log (N))
+Worst Case: O(N2)
+
+Space Complexity:O(n)
+
+Disadvanatges:
+It is not a good choice for small data sets.
+It is not a stable sort, meaning that if two elements have the same key, their relative order will not be preserved in the sorted output
+
+Advantages:
+t is a divide-and-conquer algorithm that makes it easier to solve problems.
+It is efficient on large data sets.
+It has a low overhead, as it only requires a small amount of memory to function.
+
+Merge Sort vs quick sort
+Merge sort can work well on any type of data sets irrespective of its size (either large or small). whereas The quick sort cannot work well with large datasets.
+Additional storage space requirement : Merge sort is not in place because it requires additional memory space to store the auxiliary arrays. whereas The quick sort is in place as it doesn’t require any additional storage.
+Efficiency : Merge sort is more efficient and works faster than quick sort in case of larger array size or datasets. whereas Quick sort is more efficient and works faster than merge sort in case of smaller array size or datasets.
+Quick sort is preferred for arrays. whereas Merge sort is preferred for linked lists.
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int partition(int arr[],int s,int e)
+{
+    int pivot=arr[s];
+    int count=0;
+    // calculate no of elements smaller then pivot
+    for(int i=s+1;i<=e;i++)
+    {
+        if(arr[i]<=pivot)
+        count++;
+    }
+    int pos=s+count;   // for storing the correct index of the pivot element
+    swap(arr[s],arr[pos]); // placing the pivot at right postion
+    
+    // putting smaller elements on the left and bigger elements on right of pivot
+    int i=s;
+    int j=e;
+    while(i<pos&&j>pos)
+    {
+        while(arr[i]<pivot)
+        i++;
+        while(arr[j]>pivot)
+        j--;
+        swap(arr[i],arr[j]);
+        i++;
+        j--;
+        
+    }
+    return pos;
+
+    
+}
+void quick_sort(int arr[],int s,int e)
+{
+    if(s>=e)//base case
+    return;
+    //partitoning the array
+    int p=partition(arr,s,e); // this will return the index position of the elment placed at its correct postion in sorted array
+    quick_sort(arr,s,p-1);    //left partiton
+    quick_sort(arr,p+1,e);   //right partition
+    
+}
+
+int main()
+{
+int arr[]={3,5,1,8,2,4,4};
+int n=sizeof(arr)/sizeof(int);
+quick_sort(arr,0,n-1);
+for(int i=0;i<n;i++)
+cout<<arr[i]<<" ";
+
+}

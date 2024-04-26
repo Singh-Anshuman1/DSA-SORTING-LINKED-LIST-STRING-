@@ -1,0 +1,32 @@
+// Heaviest  element in every round is selected and placed at the end
+Worst Case - O(n^2)
+Best Case - O(n) if already sorted
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={12,3,32,1,17,21,5};
+    int n=sizeof(arr)/sizeof(int);
+    bool swapped=false;               // optimising the code
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0;j<n-i-1;j++)
+        {
+            if(arr[j]>arr[j+1])
+            swap(arr[j],arr[j+1]);
+            swapped=true;
+        }
+        if(swapped==false)
+        break; // if already sorted
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}

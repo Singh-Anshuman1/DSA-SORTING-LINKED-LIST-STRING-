@@ -1,0 +1,82 @@
+Useful in sorting link lists in O(nlogn) ,in inversion count problem
+
+Time Complexity:
+Best Case = O(nlogn)
+Worst Case =O(nlogn)
+
+
+Space Complexity=O(n)
+
+Merge sort has a worst-case time complexity of O(N logN), which means it performs well even on large datasets.
+
+Not always optimal for small datasets: For small datasets, Merge sort has a higher time complexity than some other sorting algorithms, such as insertion sort. This can result in slower performance for very small datasets.
+
+
+
+//
+#include <bits/stdc++.h>
+using namespace std;
+void merge(int *arr,int s,int e)
+{
+    int mid=s+(e-s)/2;
+    int len1=mid-s+1;
+    int len2=e-mid;
+    int *arr1=new int[len1];
+    int *arr2=new int[len2];
+    int k=s;
+    // copying first half into array 1 and second half into array 2
+    for(int i=0;i<len1;i++)
+    {
+        arr1[i]=arr[k++];
+    }
+    k=mid+1;
+    for(int i=0;i<len2;i++)
+    {
+        arr2[i]=arr[k++];
+    }
+    // merging the values into original array based on sorting
+    int index1=0;
+    int index2=0;
+    int main_arrIndex=s;
+    while(index1<len1&&index2<len2)
+    {
+        if(arr1[index1]<arr2[index2])
+        {
+            arr[main_arrIndex++]=arr1[index1++];
+        }
+        else
+        arr[main_arrIndex++]=arr2[index2++];
+    }
+    //copying remaining values
+    while(index1<len1)
+    {
+     arr[main_arrIndex++]=arr1[index1++];
+    }
+    while(index2<len2)
+    {
+    arr[main_arrIndex++]=arr2[index2++];   
+    }
+    
+    delete []arr1;
+    delete []arr2;
+    
+}
+void merge_sort(int *arr,int s,int e)
+{
+    if(s==e) // if single element in array
+    return ;
+    int mid=s+(e-s)/2;
+    //dividing the array until single element is present
+    merge_sort(arr,s,mid);
+    merge_sort(arr,mid+1,e);
+    // combining the array 
+    merge(arr,s,e);
+}
+int main()
+{
+int arr[]={1,5,4,3,2,7,6};
+int n=sizeof(arr)/sizeof(int);
+merge_sort(arr,0,n-1);
+for(int i=0;i<n;i++)
+cout<<arr[i]<<" ";
+}
